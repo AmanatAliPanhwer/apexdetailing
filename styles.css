@@ -17,6 +17,12 @@
   --green: #18d889;
   --silver: #bfc2c7;
 
+  /* theme-dependent chrome */
+  --chrome: rgba(5, 6, 7, 0.94);
+  --tag-bg: rgba(5, 6, 7, 0.82);
+  --shadow-lg: 0 24px 48px -20px rgba(0, 0, 0, 0.9);
+  --grid-line: rgba(255, 255, 255, 0.03);
+
   /* type */
   --font-disp: 'Anton', 'Arial Narrow', 'Impact', sans-serif;
   --font-body: 'Archivo', 'Segoe UI', Arial, sans-serif;
@@ -31,6 +37,25 @@
   --t-med: 420ms;
   --t-slow: 900ms;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="light"] {
+  --bg: #f1f2f4;
+  --bg-2: #e8eaee;
+  --fg: #101216;
+  --muted: #5b626b;
+  --dim: #8b9199;
+  --line: #d8dce2;
+  --line-strong: #c2c8d0;
+  --accent: #0056d6;
+  --accent-hi: #0a52c9;
+  --accent-soft: rgba(0, 86, 214, 0.09);
+  --green: #0c9c5f;
+  --silver: #4b5159;
+  --chrome: rgba(243, 244, 247, 0.92);
+  --tag-bg: rgba(243, 244, 247, 0.92);
+  --shadow-lg: 0 24px 48px -28px rgba(15, 23, 42, 0.35);
+  --grid-line: rgba(10, 14, 20, 0.05);
 }
 
 /* ---------- reset / base ---------- */
@@ -195,87 +220,6 @@ button {
   font-size: 0.72rem;
 }
 
-/* ---------- page index rail ---------- */
-.page-index {
-  position: fixed;
-  top: 50%;
-  left: clamp(0.75rem, 2vw, 1.5rem);
-  transform: translateY(-50%);
-  z-index: 60;
-  display: none;
-}
-
-@media (min-width: 1280px) {
-  .page-index {
-    display: block;
-  }
-}
-
-.pi-line {
-  position: absolute;
-  left: 9px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--line-strong);
-}
-
-.pi-item {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 19px;
-  height: 19px;
-  margin: 10px 0;
-  border: 1px solid var(--line-strong);
-  background: var(--bg);
-  font-size: 0.56rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--dim);
-  text-decoration: none;
-  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
-}
-
-.pi-item:hover,
-.pi-item.is-current {
-  color: var(--fg);
-  border-color: var(--dim);
-}
-
-/* label sign that slides out on hover */
-.pi-item::after {
-  content: attr(data-label);
-  position: absolute;
-  left: calc(100% + 14px);
-  top: 50%;
-  transform: translateY(-50%) translateX(-6px);
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--line-strong);
-  background: var(--bg);
-  font-size: 0.56rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  white-space: nowrap;
-  color: var(--fg);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 5;
-  transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
-}
-
-.pi-item:hover::after,
-.pi-item.is-current::after {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-.pi-item.is-current {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-
 /* ---------- section headings ---------- */
 .section-head {
   display: grid;
@@ -342,7 +286,7 @@ button {
 }
 
 .site-header.scrolled {
-  background: rgba(5, 6, 7, 0.94);
+  background: var(--chrome);
   border-bottom-color: var(--line-strong);
 }
 
@@ -500,6 +444,44 @@ button {
   transform: rotate(-45deg);
 }
 
+/* ---------- theme toggle ---------- */
+.theme-toggle {
+  position: relative;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: var(--accent-hi);
+  color: var(--accent-hi);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-toggle .tt-moon {
+  display: none;
+}
+
+html[data-theme="light"] .theme-toggle .tt-sun {
+  display: none;
+}
+
+html[data-theme="light"] .theme-toggle .tt-moon {
+  display: block;
+}
+
 /* ---------- mobile menu ---------- */
 .mobile-menu {
   position: fixed;
@@ -594,7 +576,7 @@ button {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: calc(100% / 12) 100%;
 }
 
@@ -747,7 +729,7 @@ button {
 
 .pkg:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.9);
+  box-shadow: var(--shadow-lg);
   z-index: 2;
 }
 
@@ -1207,7 +1189,7 @@ button {
 
 .ba-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.9);
+  box-shadow: var(--shadow-lg);
   z-index: 2;
 }
 
@@ -1313,7 +1295,7 @@ button {
   padding: 0.45rem 0.85rem;
   border: 1px solid var(--line-strong);
   border-top: 0;
-  background: rgba(5, 6, 7, 0.82);
+  background: var(--tag-bg);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.24em;
@@ -1472,7 +1454,7 @@ button {
 
 .step:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.9);
+  box-shadow: var(--shadow-lg);
   background: var(--bg-2);
   z-index: 2;
 }
@@ -1756,6 +1738,19 @@ button {
 }
 
 @media (max-width: 640px) {
+  .header-inner {
+    gap: 0.75rem;
+    padding-inline: 0.75rem;
+  }
+  .brand {
+    gap: 0.5rem;
+  }
+  .brand-name {
+    font-size: 1.15rem;
+  }
+  .header-actions {
+    gap: 0.5rem;
+  }
   .hero-title {
     font-size: clamp(2.9rem, 15vw, 4.5rem);
   }

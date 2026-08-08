@@ -12,18 +12,32 @@
   <meta property="og:description" content="Precision. Protection. Shine. Professional mobile auto detailing across Toronto & the GTA. Book: 437-595-0072.">
   <meta property="og:image" content="assets/img/hero-interior.jpg">
 
-  <link rel="icon" type="image/jpeg" href="assets/img/logo.jpg">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('apex-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AutoWash",
     "name": "Apex Detailing",
-    "image": "assets/img/logo.jpg",
+    "image": "assets/img/logo.png",
     "description": "Mobile auto detailing for Toronto & the GTA. Interior detailing packages, exterior car wash, and paint restoration add-ons delivered to your home, office, or another convenient location.",
     "telephone": "+14375950072",
     "priceRange": "$45 - $150",
@@ -54,7 +68,7 @@
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Apex Detailing — home">
         <span class="brand-mark">
-          <img src="assets/img/logo.jpg" alt="Apex Detailing Inc. logo" width="44" height="44">
+          <img src="assets/img/logo.png" alt="Apex Detailing Inc. logo" width="44" height="44">
         </span>
         <span class="brand-text">
           <span class="brand-name">APEX</span>
@@ -72,6 +86,15 @@
 
       <div class="header-actions">
         <a class="header-phone" href="tel:+14375950072">437-595-0072</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle light / dark mode" aria-pressed="false">
+          <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
         <a class="btn btn-accent btn-sm" href="#book">BOOK <span class="arr">→</span></a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           <span></span>
@@ -96,17 +119,6 @@
       <p class="mm-note">MOBILE SERVICE — TORONTO &amp; GTA</p>
     </div>
   </div>
-
-  <aside class="page-index" aria-hidden="true">
-    <span class="pi-line"></span>
-    <a class="pi-item" href="#top" data-label="TOP"><span>00</span></a>
-    <a class="pi-item" href="#packages" data-label="PACKAGES"><span>01</span></a>
-    <a class="pi-item" href="#paint" data-label="EXTERIOR"><span>02</span></a>
-    <a class="pi-item" href="#transform" data-label="RESULTS"><span>03</span></a>
-    <a class="pi-item" href="#mobile" data-label="MOBILE"><span>04</span></a>
-    <a class="pi-item" href="#process" data-label="PROCESS"><span>05</span></a>
-    <a class="pi-item" href="#book" data-label="BOOK"><span>06</span></a>
-  </aside>
 
   <main id="main">
     <!-- ============ HERO ============ -->
@@ -390,7 +402,7 @@
     <div class="section-container">
       <div class="footer-brand">
         <span class="brand-mark footer-mark">
-          <img src="assets/img/logo.jpg" alt="Apex Detailing Inc. logo" width="72" height="72">
+          <img src="assets/img/logo.png" alt="Apex Detailing Inc. logo" width="72" height="72">
         </span>
         <div>
           <p class="footer-word">APEX DETAILING</p>

@@ -46,17 +46,13 @@
     if (window.innerWidth > 960) setMenu(false);
   });
 
-  /* ---------- scrollspy: nav links + page-index rail ---------- */
+  /* ---------- scrollspy: nav links ---------- */
   var sectionIds = ['top', 'packages', 'paint', 'transform', 'mobile', 'process', 'book'];
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.site-nav a'));
-  var piItems = Array.prototype.slice.call(document.querySelectorAll('.pi-item'));
 
   function setCurrent(id) {
     navLinks.forEach(function (link) {
       link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-    });
-    piItems.forEach(function (item) {
-      item.classList.toggle('is-current', item.getAttribute('href') === '#' + id);
     });
   }
 
@@ -184,4 +180,24 @@
       if (details) details.hidden = open;
     });
   });
+
+  /* ---------- theme toggle ---------- */
+  var themeToggle = document.querySelector('.theme-toggle');
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function syncThemeUI() {
+    var cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    if (themeToggle) themeToggle.setAttribute('aria-pressed', cur === 'light' ? 'true' : 'false');
+    if (themeMeta) themeMeta.setAttribute('content', cur === 'light' ? '#f1f2f4' : '#050607');
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('apex-theme', next); } catch (e) {}
+      syncThemeUI();
+    });
+  }
+  syncThemeUI();
 })();

@@ -995,7 +995,6 @@ button {
 @media (min-width: 1000px) {
   .paint-grid {
     grid-template-columns: 0.9fr 1.1fr;
-    align-items: start;
   }
 }
 
@@ -1016,9 +1015,16 @@ button {
 .paint-media {
   position: relative;
   margin: 0;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 7;
+  min-height: clamp(220px, 55vw, 320px);
   overflow: hidden;
   border: 1px solid var(--line-strong);
+}
+
+@media (min-width: 1000px) {
+  .paint-media {
+    min-height: 0;
+  }
 }
 
 .paint-media img {
